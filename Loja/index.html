@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Redoute Style Product Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f7f7f7;
+        }
+        .product-container {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        #model-container {
+            width: 100%;
+            height: 500px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .color-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .color-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+        .color-btn.active {
+            border-color: #000;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+        }
+        .price {
+            color: #d11243;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #d11243;
+            border-color: #d11243;
+        }
+        .btn-primary:hover {
+            background-color: #a80f36;
+        }
+        .product-features {
+            background-color: #f9f9f9;
+            border-left: 4px solid #d11243;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .product-details h1 {
+            font-weight: 600;
+            color: #333;
+        }
+        .product-rating {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row product-container">
+            <!-- 3D Model Section -->
+            <div class="col-md-6">
+                <div id="model-container">
+                     <button id="animate_btn" style="position: absolute; bottom: 20px; right: 20px; padding: 10px 20px; background-color: #d11243; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                       <span id="animate-text">Amina-me</span>
+                    </button>
+
+                    
+                </div>
+                <div class="text-center mt-3">
+                    <span class="product-rating">★★★★☆</span>
+                    <span class="text-muted ms-2">(124 reviews)</span>
+                </div>
+            
+                <!-- Product Dimensions Section -->
+                <div class="product-features mt-4">
+                    <h2>Dimensões:</h2>
+                    <table class="dimensions-table table">
+                        <thead>
+                            <tr>
+                                <th>Parte</th>
+                                <th>Comprimento</th>
+                                <th>Altura</th>
+                                <th>Profundidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Abajur</td>
+                                <td>Base: 22 cm, Superior: 10 cm</td>
+                                <td>13 cm</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Aplique desdobrado</td>
+                                <td>22 cm</td>
+                                <td>25 cm</td>
+                                <td>38,5 cm</td>
+                            </tr>
+                            <tr>
+                                <td>Aplique dobrado</td>
+                                <td>22 cm</td>
+                                <td>25 cm</td>
+                                <td>26 cm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-3">
+                        <small class="text-muted">Free delivery | Easy returns</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Details Section -->
+            <div class="col-md-6 product-details">
+                <h1 class="mb-3">Premium Wireless Headphones</h1>
+                
+                <div class="h3 price mb-3">
+                    €44.99€
+                </div>
+
+                <p class="text-muted mb-4">
+                  <h2>Descrição:</h2>
+                  <ul class="details-list">
+                      <li>Estrutura em ferro revestida por uma tinta epóxi</li>
+                      <li>Abajur em algodão cor cru</li>
+                      <li>Base modelo arredondado</li>
+                      <li>Casquilho E14 para lâmpadas 40W máx.</li>
+                      <li>Este candeeiro é compatível com as lâmpadas das classes energéticas: A-B-C-D-E</li>
+                  </ul>
+                </p>
+
+                <!-- Color Selection -->
+                <div class="mb-4">
+                    <label class="form-label">Color: <span id="selected-color">Black</span></label>
+                    <div class="color-selector" id="color-selector">
+                        <button id="color-Black" class="color-btn" data-color="Black" style="background-color: black;"></button>
+                        <button id="color-White" class="color-btn" data-color="White" style="background-color: white; border: 1px solid #ddd;"></button>
+                        <button id="color-Blue" class="color-btn" data-color="Blue" style="background-color: #3498db;"></button>
+                        <button id="color-Red" class="color-btn" data-color="Red" style="background-color: #e74c3c;"></button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-block mb-4">
+                    <button class="btn btn-primary btn-lg me-2" id="btn_compra">
+                        <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                    </button>
+                    <button class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-heart me-2"></i>Save
+                    </button>
+                </div>
+
+                <!-- Product Features -->
+               
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  <script async src="/node_modules/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/node_modules/three/build/three.module.js",
+        "three/addons/": "/node_modules/three/examples/jsm/"
+        }
+      }
+    </script>
+  <script type="module" defer src="./scripts/main.js"></script>
+</body>
+
+</html>
