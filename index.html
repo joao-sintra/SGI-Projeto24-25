@@ -1,29 +1,375 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-PT">
 <head>
-  <meta charset="UTF-8">
-  <title>Projeto prático Avaliação SGI</title>
-  <link rel="stylesheet" href="side_by_side_style.css"></style>
-</head>
-
-<body>
-  <div id="container">
-    <div id="canvas-container">
-      <canvas id="three-canvas"></canvas>
-    </div>
-  </div>
-
-  <script async src="/node_modules/es-module-shims.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "/node_modules/three/build/three.module.js",
-        "three/addons/": "/node_modules/three/examples/jsm/"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global font style */
+        body {
+            font-family: "Poppins", sans-serif;
         }
-      }
-    </script>
-  <script type="module" defer src="./scripts/main.js"></script>
-</body>
 
+        /* Cabeçalho */
+        .navbar {
+            height: 135px; 
+            padding: 0; 
+        }
+
+        /* Logotipo */
+        .navbar-brand img {
+            width: 110px; 
+            height: 110px; 
+            object-fit: contain; 
+        }
+
+        /* Fixar a barra lateral (categorias) */
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh; 
+            overflow-y: auto;
+        }
+
+        /* Área de produtos */
+        .products {
+            height: 100vh;
+            overflow-y: auto;
+            padding-left: 20px;
+        }
+
+        /* Estilo para subcategorias */
+        .subcategory {
+            margin-left: 20px; 
+            margin-bottom: 10px; 
+        }
+
+        /* Remover estilo padrão de listas e links */
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        /* Estilo para as categorias e subcategorias */
+        .category-link {
+            color: black;
+            text-decoration: none;
+        }
+
+        .subcategory-link {
+            color: black;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        .category-link:hover, .subcategory-link:hover  {
+            border-bottom: 2px solid black;
+        }
+
+        /* Garantir o alinhamento correto na navbar */
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Contêiner flex para alinhar "CASA" e "MODA" */
+        .navbar-nav {
+            display: flex;
+            align-items: center; 
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        /* Estilo para o link "CASA" com a linha abaixo */
+        .nav-link-casa {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            padding-bottom: 10px; 
+            margin-right: 30px; 
+        }
+
+        /* Linha do texto "CASA" */
+        .nav-link-casa::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Estilo para o link "MODA" com a linha abaixo */
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+
+        /* Linha para o texto "MODA" no hover */
+        .nav-link .underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #000;
+            transition: width 0.3s;
+        }
+
+        /* Ação para quando rato passa por cima do texto "MODA", a linha se expande */
+        .nav-link:hover .underline {
+            width: 100%;
+        }
+
+        /* Adicionar um estilo flex ao contêiner dos links */
+        .navbar-nav {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #00565f !important;
+        }
+
+        footer h6 {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .bi {
+            color: white; 
+        }
+
+        footer .border-top {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid p-2">
+                <!-- Logotipo -->
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./img/logo.png" alt="Logotipo" class="me-2">
+                </a>
+
+                <!-- Secções principais -->
+                <ul class="navbar-nav flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link-casa text-dark me-5" href="#">
+                            CASA
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            MODA
+                            <span class="underline"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Barra de pesquisa -->
+                <form class="d-flex w-50 ms-0">
+                    <div class="input-group">
+                        <input class="form-control form-control-sm rounded-pill" type="search" placeholder="O que procura?" aria-label="Pesquisar" style="height: 50px;">
+                    </div>
+                </form>
+
+                <div class="d-flex align-items-center ms-3">
+                    <a href="#" class="text-decoration-none me-5 text-dark fs-3">
+                        <i class="bi bi-person"></i> <b><span class="fs-6">Entrar / Registar</span></b>
+                    </a>
+                    <a href="#" class="text-decoration-none me-5 text-dark fs-3">
+                        <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="text-decoration-none me-5 text-dark fs-3">
+                        <i class="bi bi-bag"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Caminho de navegação -->
+    <div class="container-fluid mt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb small" style="font-size: 0.8rem;" >
+                <li class="breadcrumb-item">
+                    <a href="#" class="text-decoration-none text-dark">La Redoute</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#" class="text-decoration-none text-dark">Iluminação</a>
+                </li>
+                <li class="breadcrumb-item active fw-bold" aria-current="page">Apliques de parede</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Título do Catálogo -->
+    <div class="container-fluid mt-4">
+        <h2 class="fs-1 fw-bold">
+            Apliques de parede
+        </h2>
+    </div>
+
+    <!-- Catálogo de Produtos -->
+    <div class="container-fluid p-3">
+        <div class="row">
+            
+            <!-- Barra lateral das Categorias -->
+            <div class="col-md-3 sidebar p-3">
+                <h4 class="mb-4 d-flex align-items-center fs-6">
+                    <b><i class="bi-arrow-left me-2"></i>Iluminação</b>
+                </h4>
+                <h4 class="mb-2 fs-6 fw-bold"><a href="#" class="category-link">Apliques de parede</a></h4>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="subcategory-link">Novidades</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros suspensos</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros de pé</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros de mesa</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros de teto</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros de exterior</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Candeeiros de criança</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Abajures</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Grinaldas</a></li>
+                    <li class="mb-2"><a href="#" class="subcategory-link">Acessórios elétricos</a></li>
+                </ul>
+            </div> 
+
+            <!-- Produtos -->
+            <div class="col-md-9 products">
+                <h4>Produtos</h4>
+                <div class="row">
+                    <!-- Produto 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="produto1.jpg" class="card-img-top" alt="Produto 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Produto 1</h5>
+                                <p class="card-text">Descrição do produto 1.</p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Produto 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="produto2.jpg" class="card-img-top" alt="Produto 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Produto 2</h5>
+                                <p class="card-text">Descrição do produto 2.</p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Produto 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="produto3.jpg" class="card-img-top" alt="Produto 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Produto 3</h5>
+                                <p class="card-text">Descrição do produto 3.</p>
+                                <a href="#" class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-white pt-5">
+        <div class="container-fluid">
+            <!-- Linha superior com ícones -->
+            <div class="row text-center pb-4">
+                <div class="col-md-3">
+                    <i class="bi bi-truck fs-1"></i>
+                    <p class="mt-2">ENVIO GRÁTIS*</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-arrow-left-right fs-1"></i>
+                    <p class="mt-2">TROCAS & DEVOLUÇÕES</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-shield-lock fs-1"></i>
+                    <p class="mt-2">PAGAMENTO SEGURO</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-headset fs-1"></i>
+                    <p class="mt-2">APOIO AO CLIENTE</p>
+                </div>
+            </div>
+
+            <!-- Linha inferior com colunas -->
+            <div class="row text-center border-top pt-4">
+                <div class="col-md-3">
+                    <h6>LA REDOUTE</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white text-decoration-none">Sobre nós</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Sustentabilidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>SERVIÇOS</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white text-decoration-none">Guia de tamanhos</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>MARCAS EXCLUSIVAS</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white text-decoration-none">Coleção XYZ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Designers Parceiros</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>UNIVERSO LA REDOUTE</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-white text-decoration-none">Blog</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Ofertas exclusivas</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rodapé com informações legais -->
+            <div class="row text-center border-top mt-4 pt-3 small">
+                <div class="col-md-12">
+                    <p class="mb-0">Condições gerais de venda * Condições das ofertas em vigor * Política de privacidade e cookies * Livro de reclamações electrónico * Recrutamento La Redoute</p>
+                    <p class="mt-3">
+                        <i class="bi bi-globe"></i> Portugal
+                        <a href="#" class="text-white text-decoration-none ms-2">Alterar País</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+</body>
 </html>
