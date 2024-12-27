@@ -29,7 +29,7 @@ let composer, outlinePass;
 
 
 // Scene setup
-var container = document.getElementById('model-container');
+var container = document.getElementById('product3d');
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -40,12 +40,12 @@ container.appendChild(renderer.domElement);
 var controls = new OrbitControls(camera, renderer.domElement);
 controls.panSpeed = 0.1;
 camera.position.set(-3, 2, 8);
-camera.lookAt(0, -1, 3.5);
-controls.target.set(0, -1, 2.5);
+camera.lookAt(-2, -1, -3.5);
+controls.target.set(0, 2, -5);
 controls.update();
 
 // Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
 
 const hemiLight = new THREE.HemisphereLight(0x87CEEB, 0xBDB76B, 0.5);
@@ -97,7 +97,7 @@ loader.load(
             }
         });
         suporte = gltf.scene.getObjectByName("Suport");
-        gltf.scene.position.set(0, 3, -2.5);
+        gltf.scene.position.set(0, 4, -10);
         scene.add(gltf.scene);
 
 
@@ -226,12 +226,17 @@ loader.load(
         renderer.domElement.addEventListener('pointermove', onPointerMove);
         renderer.domElement.addEventListener('pointerup', onPointerUp);
 
-        lampada_cilindrica = scene.getObjectByName("C_LightBulb");
+        //lampada_cilindrica = scene.getObjectByName("C_LightBulb");
         lampada_esferica = scene.getObjectByName("S_LightBulb");
-        lampada_esferica.visible = false;
+        lampada_esferica.visible = true;
+        //add light to the lampada_esferica object
+        let light = new THREE.PointLight(0xffffff, 25, 1000, 1.5);
+        light.position.set(0, 0, 0);
+        lampada_esferica.add(light);
 
-        lampada_cilindrica.children[0].material.emissive = cor_default;
+       
         SGI_Example.setupMockupScene(scene, suporte);
+
 
     },
     (progress) => {
@@ -282,10 +287,33 @@ function animar() {
     renderer.render(scene, camera);
     mixer.update(clock.getDelta());
 }
-animar();
+function changeMaterialColor(color) {
+    const object = scene.getObjectByName("Support"); // Replace with your object's name
+    if (object) {
+        object.traverse((child) => {
+            if (child.isMesh) {
+                child.material.color.set(color);
+                child.material.metalness = 0.8; // Add metallic effect
+                child.material.roughness = 0.2;
+            }
+        });
+    }
+}
+document.getElementById('latao').addEventListener('click', () => {
+    changeMaterialColor('#947549'); 
+});
+document.getElementById('preto').addEventListener('click', () => {
+    changeMaterialColor('black'); 
+});
+document.getElementById('branco').addEventListener('click', () => {
+    changeMaterialColor('white'); 
+});
 
-window.addEventListener('resize', () => {
+document.getElementById('threeDModal').addEventListener('shown.bs.modal', () => {
+    // Force resize to ensure proper render dimensions
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
+
+    animar();
 });

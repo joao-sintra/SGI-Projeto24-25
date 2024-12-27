@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,15 +16,15 @@
 
         /* Cabeçalho */
         .navbar {
-            height: 135px; 
-            padding: 0; 
+            height: 135px;
+            padding: 0;
         }
 
         /* Logotipo */
         .navbar-brand img {
-            width: 110px; 
-            height: 110px; 
-            object-fit: contain; 
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
         }
 
         /* Garantir o alinhamento correto na navbar */
@@ -35,7 +36,7 @@
         /* Contêiner flex para alinhar "CASA" e "MODA" */
         .navbar-nav {
             display: flex;
-            align-items: center; 
+            align-items: center;
             padding-left: 0;
             margin-bottom: 0;
         }
@@ -47,8 +48,8 @@
             text-decoration: none;
             font-weight: bold;
             color: black;
-            padding-bottom: 10px; 
-            margin-right: 30px; 
+            padding-bottom: 10px;
+            margin-right: 30px;
         }
 
         /* Linha do texto "CASA" */
@@ -96,8 +97,8 @@
         }
 
         .product-image img {
-            max-width: 100%;
-            height: 300px;
+            
+
             border-radius: 8px;
             object-fit: cover;
         }
@@ -123,59 +124,63 @@
         }
 
         /* Aumentar o tamanho das caixas das setas */
-        .carousel-control-prev, .carousel-control-next {
-            width: 60px;  
-            height: 60px; 
-            background-color: rgba(0, 0, 0, 0.5); 
-            border-radius: 50%;  
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: absolute; 
-            top: 50%;  
-            transform: translateY(-50%); 
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         /* Posiciona a seta à esquerda */
         .carousel-control-prev {
-            left: 10px; 
+            left: 10px;
         }
 
         /* Posiciona a seta à direita */
         .carousel-control-next {
-            right: 10px; 
+            right: 10px;
         }
 
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            width: 30px;  
-            height: 30px; 
-            border-radius: 50%;  
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
         }
 
         /* Alteração das setas ao passar o rato */
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            background-color: black; 
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: black;
         }
 
         /* Diminuir a altura da imagem principal no carrossel */
         .carousel-item img {
-            max-width: 100%; 
-            height: 650px;
+            width: 100%;
+            height: 500px;
+
             object-fit: cover;
         }
 
         /* Ajustar o layout da linha de miniaturas para garantir que fiquem na mesma linha */
         .row.mt-2 {
             display: flex;
-            gap: 1px;  
-            justify-content: flex-start;  
-            align-items: center;  
+            gap: 1px;
+            justify-content: flex-start;
+            align-items: center;
         }
 
         /* Ajusta o estilo das miniaturas */
         .thumbnail {
             padding: 0;
-            width: 10%; 
+            width: 10%;
             margin-left: 12px;
         }
 
@@ -185,8 +190,8 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-bottom: 0;
-            width: 100%;  
-            height: auto; 
+            width: 100%;
+            height: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
@@ -200,74 +205,74 @@
         /* Estilo para os círculos de cor */
         .product-colors {
             display: flex;
-            gap: 10px;  
+            gap: 10px;
         }
 
         .color-circle {
             width: 30px;
             height: 30px;
-            border-radius: 50%;  
+            border-radius: 50%;
             display: inline-block;
-            border: 2px solid #ddd;  
+            border: 2px solid #ddd;
         }
 
         /* Efeito de hover para os círculos */
         .color-circle:hover {
-            transform: scale(1.1);  
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); 
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Define a largura máxima para o input-group */
         .input-group {
-            max-width: 130px;  
+            max-width: 130px;
             width: 100%;
         }
 
         /* Ajusta o campo de quantidade */
         .input-group .form-control {
-            width: 60px; 
-            text-align: center; 
+            width: 60px;
+            text-align: center;
         }
 
         /* Define tamanho personalizado para o campo de quantidade */
         #quantity {
-            width: 60px;  
-            padding: 5px;  
+            width: 60px;
+            padding: 5px;
             font-size: 1.2rem;
         }
 
         /* Estilos do botão "Anima-me" */
         .btn-secondary {
-            background-color: #4169e1; 
+            background-color: #4169e1;
             border-color: #4169e1;
-            font-size: 0.9rem; 
-            padding:  0.50rem 1rem; 
+            font-size: 0.9rem;
+            padding: 0.50rem 1rem;
             font-size: 1.2rem;
         }
 
         .btn-primary {
-            background-color: black; 
-            border-color: black; 
-            font-size: 0.9rem; 
-            padding:  0.75rem 1.5rem; 
-            font-size: 1.2rem; 
+            background-color: black;
+            border-color: black;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
         }
 
         .heart-btn {
-            color: black; 
-            font-size: 2rem; 
-            margin-left: 10px; 
-            cursor: pointer; 
-            vertical-align: bottom; 
+            color: black;
+            font-size: 2rem;
+            margin-left: 10px;
+            cursor: pointer;
+            vertical-align: bottom;
         }
 
         .btn-primary i {
-            margin-left: 10px; 
+            margin-left: 10px;
         }
 
         .btn-primary:hover {
-            background-color: #494949; 
-            border-color: #494949; 
+            background-color: #494949;
+            border-color: #494949;
         }
 
         .description {
@@ -299,14 +304,25 @@
         }
 
         footer .bi {
-            color: white; 
+            color: white;
         }
 
         footer .border-top {
             border-color: rgba(255, 255, 255, 0.2) !important;
         }
+
+        #product3d {
+
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
     </style>
 </head>
+
 <body>
     <!-- Cabeçalho -->
     <header>
@@ -335,7 +351,8 @@
                 <!-- Barra de pesquisa -->
                 <form class="d-flex w-50 ms-0">
                     <div class="input-group">
-                        <input class="form-control form-control-sm rounded-pill" type="search" placeholder="O que procura?" aria-label="Pesquisar" style="height: 50px;">
+                        <input class="form-control form-control-sm rounded-pill" type="search"
+                            placeholder="O que procura?" aria-label="Pesquisar" style="height: 50px;">
                     </div>
                 </form>
 
@@ -356,63 +373,88 @@
 
     <!-- Produto -->
     <div class="container-fluid mt-4">
-        <div class="row">
-            <!-- Imagem do produto -->
-        <div class="col-md-6">
-            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active position-relative">
-                        <img src="./img/img1.png" class="d-block w-100" alt="Produto">
+        <div class="modal fade" id="threeDModal" tabindex="-1" aria-labelledby="threeDModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="threeDModalLabel">Produto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#threeDModal"
+                            onclick="showInfo()">
+                            Information
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- 3D Content -->
+                        <div id="product3d" class="position-relative" style="width: 600px; height: 650px;">
+                            <!-- Place your 3D model or canvas here -->
+                            <!-- Buttons on the right side -->
 
-                        <!-- Botão 3D no canto inferior direito da imagem -->
-                        <button class="btn btn-dark position-absolute bottom-0 end-0 mb-3 me-3">
-                            3D
-                        </button>
+                        </div>
+
+                        <div
+                            class="position-absolute top-50 end-0 translate-middle-y me-5 d-flex flex-column align-items-center">
+                            <h3>Cores</h3>
+                            <div class="product-colors mb-3">
+
+                                <ul class="list-unstyled" <li><span class="color-circle d-block mb-2" id="preto"
+                                        style="background-color: #0a0a0a;" title="Preto" name="preto"></span></li>
+                                    <li><span class="color-circle d-block mb-2" id="latao"
+                                            style="background-color: #947549;" title="Latão" name="latao"></span></li>
+                                    <li><span class="color-circle d-block" id="branco"
+                                            style="background-color: #ffffff;" title="Branco" name="branco"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Information Content -->
+                        <div id="productInfo" style="display: none;">
+                            <h5>Informações do Produto</h5>
+                            <p>Aqui pode colocar detalhes e especificações do seu produto.</p>
+                        </div>
                     </div>
-                    <div class="carousel-item position-relative">
-                        <img src="./img/img2.png" class="d-block w-100" alt="Produto">
-                        
-                        <button class="btn btn-dark position-absolute bottom-0 end-0 mb-3 me-3">
-                            3D
-                        </button>
-                    </div>
-                    <div class="carousel-item position-relative">
-                        <img src="./img/img3.png" class="d-block w-100" alt="Produto">
-                        
-                        <button class="btn btn-dark position-absolute bottom-0 end-0 mb-3 me-3">
-                            3D
-                        </button>
-                    </div>
-                    <div class="carousel-item position-relative">
-                        <img src="./img/img4.png" class="d-block w-100" alt="Produto">
-                        
-                        <button class="btn btn-dark position-absolute bottom-0 end-0 mb-3 me-3">
-                            3D
-                        </button>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="row mt-2">
-                <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="0">
-                    <img src="./img/img1.png" class="img-thumbnail" alt="Thumbnail">
-                </div>
-                <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="1">
-                    <img src="./img/img2.png" class="img-thumbnail" alt="Thumbnail">
-                </div>
-                <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="2">
-                    <img src="./img/img3.png" class="img-thumbnail" alt="Thumbnail">
-                </div>
-                <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="3">
-                    <img src="./img/img4.png" class="img-thumbnail" alt="Thumbnail">
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <!-- Imagem do produto -->
+            <div class="col-md-6">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active position-relative">
+                            <img src="./img/img-preto1.png" id="prod1" class="d-block w-100" alt="Produto">
+                        </div>
+                        <div class="carousel-item position-relative">
+                            <img src="./img/img-preto2.png" id="prod2" class="d-block w-100" alt="Produto">
+                        </div>
+                       
+
+                        <button class="btn btn-dark position-absolute bottom-0 end-0 mb-3 me-3" id="btn-3d"
+                            data-bs-toggle="modal" data-bs-target="#threeDModal">
+                            3D
+                        </button>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="0">
+                        <img src="./img/img-preto1.png" id="prod2" class="img-thumbnail" alt="Thumbnail">
+                    </div>
+                    <div class="col-3 thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="1">
+                        <img src="./img/img-preto2.png" id="prod2" class="img-thumbnail" alt="Thumbnail">
+                    </div>
+                    
+
+                </div>
+            </div>
 
 
             <!-- Informação do produto -->
@@ -428,16 +470,16 @@
                         <li class="breadcrumb-item active fw-bold" aria-current="page">Apliques de parede</li>
                     </ol>
                 </nav>
-                <h2 class="fw-bold my-4">Candeeiro Ajustável em Níquel</h2>
+                <h2 class="fw-bold my-4">Aplique Ajustável de Parede</h2>
 
                 <!-- Cores do produto -->
                 <label for="quantity" class="form-label fw-bold">Cores:</label>
                 <div class="product-colors mb-3">
-                    <span class="color-circle" style="background-color: #FF5733;"></span>
-                    <span class="color-circle" style="background-color: #33FF57;"></span>
-                    <span class="color-circle" style="background-color: #3357FF;"></span>
+                    <span class="color-circle" style="background-color: #000000;" name="preto"></span>
+                    <span class="color-circle" style="background-color: #947549;" name="latao"></span>
+                    <span class="color-circle" style="background-color: #ffffff;" name="branco"></span>
                 </div>
-                
+
                 <!-- Quantidade -->
                 <div class="mt-3 my-4">
                     <label for="quantity" class="form-label fw-bold">Quantidade:</label>
@@ -476,7 +518,7 @@
         <div class="row">
             <div class="col-md-8">
                 <p class="description">
-                    O aplique articulado, Voltige. Um modelo elegante e sóbrio, com um papel funcional, 
+                    O aplique articulado, Voltige. Um modelo elegante e sóbrio, com um papel funcional,
                     graças ao braço articulado que permite uma luz direcional.
                 </p>
                 <h6><b>Descrição:</b></h6>
@@ -504,7 +546,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <!-- Footer -->
     <footer class="text-white pt-5">
@@ -583,7 +625,7 @@
 
 
         // Adiciona a funcionalidade de incrementar e decrementar
-        document.getElementById('incrementBtn').addEventListener('click', function() {
+        document.getElementById('incrementBtn').addEventListener('click', function () {
             var quantityInput = document.getElementById('quantity');
             var currentValue = parseInt(quantityInput.value);
             if (currentValue < 20) {
@@ -591,13 +633,41 @@
             }
         });
 
-        document.getElementById('decrementBtn').addEventListener('click', function() {
+        document.getElementById('decrementBtn').addEventListener('click', function () {
             var quantityInput = document.getElementById('quantity');
             var currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
             }
         });
+        function showInfo() {
+            document.getElementById('productInfo').style.display = 'block';
+        }
+        document.querySelectorAll('.color-circle').forEach(circle => {
+        circle.addEventListener('click', function() {
+            const selectedColor = this.getAttribute('name');
+            const newImageSrc1 = `./img/img-${selectedColor}1.png`;
+            const newImageSrc2 = `./img/img-${selectedColor}2.png`;
+
+            document.getElementById('prod1').src = newImageSrc1;
+            document.getElementById('prod2').src = newImageSrc2;
+
+            // Update selected class
+            document.querySelectorAll('.color-circle').forEach(c => c.parentElement.classList.remove('selected'));
+            this.parentElement.classList.add('selected');
+        });
+    });
     </script>
+    <script async src="/node_modules/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/node_modules/three/build/three.module.js",
+          "three/addons/": "/node_modules/three/examples/jsm/"
+          }
+        }
+      </script>
+    <script type="module" defer src="./scripts/main.js"></script>
 </body>
+
 </html>
