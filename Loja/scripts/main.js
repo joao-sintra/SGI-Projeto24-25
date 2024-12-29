@@ -72,8 +72,17 @@ composer.addPass(effectFXAA);
 // Animation Mixer
 mixer = new THREE.AnimationMixer(scene);
 
+loader.load(
+    'models/bandeira2.gltf',
+    (gltf) => {
+        gltf.scene.scale.set(0.2, 0.2, 0.2); // Shrink model to 50%
 
-
+        gltf.scene.position.set(2, 3, -6);
+        scene.add(gltf.scene);
+    }
+);
+const mixers = [];
+const actions = [];
 // Load the model
 loader.load(
     'models/ApliqueArticuladoPecaUnica.gltf',
@@ -99,6 +108,16 @@ loader.load(
         suporte = gltf.scene.getObjectByName("Suport");
         gltf.scene.position.set(0, 4, -10);
         scene.add(gltf.scene);
+
+        
+            const mixer = new THREE.AnimationMixer(gltf.scene);
+            mixers.push(mixer);
+            gltf.animations.forEach((clip) => {
+                const action = mixer.clipAction(clip);
+                //action.play();
+                actions.push(action); // Store the action
+            });
+        
 
 
 
@@ -234,7 +253,7 @@ loader.load(
         light.position.set(0, 0, 0);
         lampada_esferica.add(light);
 
-       
+
         SGI_Example.setupMockupScene(scene, suporte);
 
 
@@ -277,15 +296,42 @@ function createRotationIndicator(axis, radius) {
 
     return ring;
 }
+function startAnimations() {
+    actions.forEach(action => {
+        action.reset();
+        action.play();
+    });
+}
+
+function pauseAnimations() {
+    actions.forEach(action => {
+        action.paused = true;
+    });
+}
+
+function resetAnimations() {
+    actions.forEach(action => {
+        action.stop();
+        action.reset();
+    });
+}
 
 // Animation loop without transformControl.update()
 let clock = new THREE.Clock();
-
+let min_latency = 1 / 30 // 30fps;
+let delta = 0;
 function animar() {
     requestAnimationFrame(animar);
     controls.update();
-    renderer.render(scene, camera);
-    mixer.update(clock.getDelta());
+    renderer.render(scene, camera)
+
+    mixers.forEach(mixer => mixer.update(delta));
+    delta += clock.getDelta();
+    if (delta < min_latency)
+        return;
+    mixer.update(Math.floor(delta / min_latency) * min_latency)
+    renderer.render(scene, camera)
+    delta = delta % min_latency
 }
 function changeMaterialColor(color) {
     const object = scene.getObjectByName("Support"); // Replace with your object's name
@@ -300,15 +346,17 @@ function changeMaterialColor(color) {
     }
 }
 document.getElementById('latao').addEventListener('click', () => {
-    changeMaterialColor('#947549'); 
+    changeMaterialColor('#947549');
 });
 document.getElementById('preto').addEventListener('click', () => {
-    changeMaterialColor('black'); 
+    changeMaterialColor('black');
 });
 document.getElementById('branco').addEventListener('click', () => {
-    changeMaterialColor('white'); 
+    changeMaterialColor('white');
 });
-
+document.getElementById('btn_anim').addEventListener('click', startAnimations);
+document.getElementById('btn_pausar').addEventListener('click', pauseAnimations);
+document.getElementById('btn_parar').addEventListener('click', resetAnimations);
 document.getElementById('threeDModal').addEventListener('shown.bs.modal', () => {
     // Force resize to ensure proper render dimensions
     camera.aspect = container.clientWidth / container.clientHeight;
