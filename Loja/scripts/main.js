@@ -71,13 +71,23 @@ composer.addPass(effectFXAA);
 
 // Animation Mixer
 mixer = new THREE.AnimationMixer(scene);
-
+//Load the flag model and his animation
 loader.load(
-    'models/bandeira2.gltf',
+    'models/bandeira.gltf',
     (gltf) => {
-        gltf.scene.scale.set(0.2, 0.2, 0.2); // Shrink model to 50%
-
-        gltf.scene.position.set(2, 3, -6);
+        gltf.scene.scale.set(0.3, 0.3, 0.3); // Shrink model to 20%
+        gltf.scene.position.set(-3, 2.65, -6);
+        gltf.scene.rotation.y = -Math.PI / 2;
+        
+        const mixer = new THREE.AnimationMixer(gltf.scene);
+        mixers.push(mixer);
+       
+        gltf.animations.forEach((clip) => {
+            const action = mixer.clipAction(clip);
+         action.play(); // Prevent automatic playback
+            actions.push(action); // Store the action for later control
+        });
+         
         scene.add(gltf.scene);
     }
 );
