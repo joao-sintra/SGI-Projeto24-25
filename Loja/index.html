@@ -138,6 +138,28 @@
             align-items: flex-end;
         }
 
+        /* Remove o estilo padrão do link no título do produto */
+        .product-title {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        /* Aplica os estilos ao passar o rato */
+        .product-card:hover .product-title {
+            text-decoration: underline;
+            color: #007bff; /* Cor ao passar o rato */
+        }
+
+        /* Para suavizar o hover no resto da card */
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02); /* Pequeno efeito de zoom */
+        }
+
         /* Footer */
         footer {
             background-color: #00565f !important;
@@ -262,36 +284,45 @@
                 <div class="row">
                     <!-- Produto 1 -->
                     <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="./produto1.jpg" class="card-img-top" alt="Produto 1">
+                        <div class="card product-card" onclick="window.location.href='paginaProduto.html';" style="cursor: pointer;">
+                            <img src="./img/img-preto2.png" class="card-img-top" alt="Produto 1">
                             <div class="card-body">
-                                <h5 class="card-title">Produto 1</h5>
-                                <p class="card-text">Descrição do produto 1.</p>
-                                <a href="#" class="btn btn-primary">Comprar</a>
+                                <h6 class="card-title">
+                                    <a href="paginaProduto.html" class="product-title"><b>Aplique Ajustável de Parede</b></a>
+                                </h6>
+                                <br>
+                                <p class="card-text">a partir de <b>127,20 €</b></p>
+                                <a href="#" class="btn btn-primary">Adicionar</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Produto 2 -->
                     <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="produto2.jpg" class="card-img-top" alt="Produto 2">
+                        <div class="card product-card">
+                            <img src="./img/aplique1.png" class="card-img-top" alt="Produto 2">
                             <div class="card-body">
-                                <h5 class="card-title">Produto 2</h5>
-                                <p class="card-text">Descrição do produto 2.</p>
-                                <a href="#" class="btn btn-primary">Comprar</a>
+                                <h6 class="card-title">
+                                    <a href="#" class="product-title"><b>Aplique Ajustável, em ferro</b></a>
+                                </h6>
+                                <br>
+                                <p class="card-text">a partir de <b>51,99 €</b></p>
+                                <a href="#" class="btn btn-primary">Adicionar</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Produto 3 -->
                     <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="produto3.jpg" class="card-img-top" alt="Produto 3">
+                        <div class="card product-card">
+                            <img src="./img/aplique2.png" class="card-img-top" alt="Produto 3">
                             <div class="card-body">
-                                <h5 class="card-title">Produto 3</h5>
-                                <p class="card-text">Descrição do produto 3.</p>
-                                <a href="#" class="btn btn-primary">Comprar</a>
+                                <h6 class="card-title">
+                                    <a href="#" class="product-title"><b>Aplique LED de parede ajustável</b></a>
+                                </h6>
+                                <br>
+                                <p class="card-text">a partir de <b>69,95 €</b></p>
+                                <a href="#" class="btn btn-primary">Adicionar</a>
                             </div>
                         </div>
                     </div>

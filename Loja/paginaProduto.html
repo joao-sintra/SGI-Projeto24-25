@@ -223,13 +223,13 @@
         }
 
         /* Define a largura máxima para o input-group */
-        .input-group {
+        .quantity-control {
             max-width: 130px;
             width: 100%;
         }
 
         /* Ajusta o campo de quantidade */
-        .input-group .form-control {
+        .quantity-control .form-control {
             width: 60px;
             text-align: center;
         }
@@ -498,9 +498,12 @@
                             <a href="#" class="text-decoration-none text-dark">La Redoute</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#" class="text-decoration-none text-dark">Iluminação</a>
+                            <a href="index.html" class="text-decoration-none text-dark">Iluminação</a>
                         </li>
-                        <li class="breadcrumb-item active fw-bold" aria-current="page">Apliques de parede</li>
+                        <li class="breadcrumb-item">
+                            <a href="index.html" class="text-decoration-none text-dark"><b><u>Apliques de parede</u></b></a>
+                        </li>
+                        <li class="breadcrumb-item active fw-bold" aria-current="page">Aplique Ajustável de Parede</li>
                     </ol>
                 </nav>
                 <h2 class="fw-bold my-4">Aplique Ajustável de Parede</h2>
@@ -516,14 +519,12 @@
                 <!-- Quantidade -->
                 <div class="mt-3 my-4">
                     <label for="quantity" class="form-label fw-bold">Quantidade:</label>
-                    <div class="input-group">
+                    <div class="input-group quantity-control">
                         <button class="btn btn-outline-secondary" type="button" id="decrementBtn">-</button>
                         <input type="number" class="form-control" id="quantity" value="1" min="1" max="20" readonly>
                         <button class="btn btn-outline-secondary" type="button" id="incrementBtn">+</button>
                     </div>
                 </div>
-
-               
 
                 <h4 class="my-4">127,20 €</h4>
                 <p class="small">IVA incluído. Entrega gratuita em 3 semanas.</p>
@@ -573,7 +574,7 @@
             </div>
             <div class="col-md-4 mb-5">
                 <!-- Imagem à direita da descrição -->
-                <img src="./img/img1.png" alt="Imagem do Produto" class="img-fluid w-100">
+                <img src="./img/img-preto2.png" alt="Imagem do Produto" class="img-fluid w-100">
             </div>
         </div>
     </div>
