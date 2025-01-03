@@ -320,17 +320,20 @@
             align-items: center;
             position: relative;
         }
+
         .btn-xs {
-        padding: 5px;
-        margin: 4px;
-        font-size: 1rem;
-    }
-    .centered-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center; /* Optional: centers vertically */
-    }
+            padding: 5px;
+            margin: 4px;
+            font-size: 1rem;
+        }
+
+        .centered-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Optional: centers vertically */
+        }
     </style>
 </head>
 
@@ -388,21 +391,17 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="threeDModalLabel">Produto</h5>
+                        <h5 class="modal-title" id="threeDModalLabel">Aplique Ajustável de Parede</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#threeDModal"
-                            onclick="showInfo()">
-                            Information
-                        </button>
+
                     </div>
                     <div class="modal-body">
+
                         <!-- 3D Content -->
                         <div id="product3d" class="position-relative" style="width: 600px; height: 650px;">
                             <!-- Place your 3D model or canvas here -->
-                            <!-- Buttons on the right side -->
 
                         </div>
-
                         <div
                             class="position-absolute top-50 end-0 translate-middle-y me-5 d-flex flex-column align-items-center">
                             <h3>Cores</h3>
@@ -433,17 +432,55 @@
                                     </li>
                                     <li>
                                         <button id="btn_parar" class="btn btn-secondary btn-sm btn-xs" type="button">
-                                            Parar
+                                            Reiniciar
                                         </button>
+                                    </li>
+                                    <li>
+                                        <a data-bs-toggle="modal" href="#infoModal"
+                                            class="btn btn-primary btn-sm btn-xs">Informações</a>
+
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- Information Content -->
-                        <div id="productInfo" style="display: none;">
-                            <h5>Informações do Produto</h5>
-                            <p>Aqui pode colocar detalhes e especificações do seu produto.</p>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Como utilizar o ambiente 3D</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Navegando na Cena:</h6>
+                        <ul>
+                            <li><strong>Rotacionar:</strong> Clique e arraste o botão esquerdo do rato para rotacionar a
+                                câmara em torno da cena.</li>
+                            <li><strong>Zoom:</strong> Utilize a roda do rato para aumentar ou diminuir o zoom.</li>
+                            <li><strong>Panorâmica:</strong> Clique e arraste o botão direito do rato ou mantenha a
+                                tecla <kbd>Shift</kbd> pressionada e arraste o botão esquerdo do rato para panorâmica da
+                                câmara.</li>
+                        </ul>
+                        <h6>Interagindo com Objetos:</h6>
+                        <ul>
+                            <li><strong>Selecionar um Objeto:</strong> Clique num objeto para selecioná-lo. Os objetos
+                                selecionados serão destacados.</li>
+                            <li><strong>Animar:</strong> Utilize o botão "Anima-me" para iniciar a animação do respetivo
+                                objeto.</li>
+                            <li><strong>Pausar:</strong> Utilize o botão "Pausar" para pausar a animação.</li>
+                            <li><strong>Reiniciar:</strong> Utilize o botão "Reiniciar" para parar e reiniciar a
+                                animação.</li>
+                        </ul>
+
+                        <p>Sinta-se à vontade para explorar e interagir com os modelos 3D para compreender melhor as
+                            suas características.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-bs-toggle="modal" href="#threeDModal" class="btn btn-secondary">Fechar</a>
+
                     </div>
                 </div>
             </div>
@@ -501,7 +538,8 @@
                             <a href="index.html" class="text-decoration-none text-dark">Iluminação</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="index.html" class="text-decoration-none text-dark"><b><u>Apliques de parede</u></b></a>
+                            <a href="index.html" class="text-decoration-none text-dark"><b><u>Apliques de
+                                        parede</u></b></a>
                         </li>
                         <li class="breadcrumb-item active fw-bold" aria-current="page">Aplique Ajustável de Parede</li>
                     </ol>

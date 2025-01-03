@@ -11,10 +11,7 @@ import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 
 // Variables for the model
 let suporte;
-let lampada_cilindrica;
 let lampada_esferica;
-let clip, action;
-const cor_default = new THREE.Color("lightblue");
 
 let selectedObject = null;
 let isRotating = false;
@@ -34,7 +31,7 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
-container.appendChild(renderer.domElement);
+container.appendChild(renderer.domElement); // Append the canvas element to the container
 
 // Add controls
 var controls = new OrbitControls(camera, renderer.domElement);
@@ -42,21 +39,23 @@ controls.panSpeed = 0.1;
 camera.position.set(-3, 2, 8);
 camera.lookAt(-2, -1, -3.5);
 controls.target.set(0, 2, -5);
+controls.minDistance = 5;
+controls.maxDistance = 15;// Reduce the max distance of zoom
 controls.update();
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 scene.add(ambientLight);
-
+// Hemisphere light
 const hemiLight = new THREE.HemisphereLight(0x87CEEB, 0xBDB76B, 0.5);
 scene.add(hemiLight);
-
+// Mixers for animations
 let mixer = new THREE.AnimationMixer(scene);
 const loader = new GLTFLoader();
-
+// Post-processing
 composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-
+// OutlinePass for highlighting the selected object to rotate
 outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, camera);
 outlinePass.edgeStrength = 3;
 outlinePass.edgeGlow = 0;
@@ -64,13 +63,14 @@ outlinePass.edgeThickness = 1;
 outlinePass.visibleEdgeColor.set('#00ff00'); // Green outline
 outlinePass.hiddenEdgeColor.set('#190a05');
 composer.addPass(outlinePass);
-
+// FXAA ShaderPass for antialiasing
 const effectFXAA = new ShaderPass(FXAAShader);
 effectFXAA.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
 composer.addPass(effectFXAA);
 
 // Animation Mixer
-mixer = new THREE.AnimationMixer(scene);
+const mixers = [];
+const actions = [], actionsFlag = [];
 //Load the flag model and his animation
 loader.load(
     'models/bandeira.gltf',
@@ -78,21 +78,28 @@ loader.load(
         gltf.scene.scale.set(0.3, 0.3, 0.3); // Shrink model to 20%
         gltf.scene.position.set(-3, 2.65, -6);
         gltf.scene.rotation.y = -Math.PI / 2;
-        
+
         const mixer = new THREE.AnimationMixer(gltf.scene);
+        mixer.timeScale = 0.7; // Slow down the animation
         mixers.push(mixer);
-       
+
         gltf.animations.forEach((clip) => {
             const action = mixer.clipAction(clip);
-         action.play(); // Prevent automatic playback
-            actions.push(action); // Store the action for later control
+            action.play(); // Prevent automatic playback
+            actionsFlag.push(action); // Store the action for later control
         });
-         
+
         scene.add(gltf.scene);
+    },
+    (progress) => {
+        console.log('Loading progress flag: ', (progress.loaded / progress.total) * 100 + '%');
+    },
+    (error) => {
+        console.error('An error happened in flag model: ', error);
     }
 );
-const mixers = [];
-const actions = [];
+
+
 // Load the model
 loader.load(
     'models/ApliqueArticuladoPecaUnica.gltf',
@@ -119,18 +126,18 @@ loader.load(
         gltf.scene.position.set(0, 4, -10);
         scene.add(gltf.scene);
 
-        
-            const mixer = new THREE.AnimationMixer(gltf.scene);
-            mixers.push(mixer);
-            gltf.animations.forEach((clip) => {
-                const action = mixer.clipAction(clip);
-                //action.play();
-                actions.push(action); // Store the action
-            });
-        
+
+        const mixer = new THREE.AnimationMixer(gltf.scene);
+        mixers.push(mixer);
+        gltf.animations.forEach((clip) => {
+            const action = mixer.clipAction(clip);
+            //action.play();
+            actions.push(action); // Store the action
+        });
 
 
 
+        // Add event listeners for mouse interactions
         function onPointerDown(event) {
             // Calculate pointer position
             const rect = renderer.domElement.getBoundingClientRect();
@@ -189,7 +196,7 @@ loader.load(
         function onPointerMove(event) {
 
             if (isRotating && selectedObject) {
-                console.log("Pointer move");
+                //  console.log("Pointer move");
                 const deltaX = event.clientX - previousMousePosition.x;
                 const deltaY = event.clientY - previousMousePosition.y;
 
@@ -246,7 +253,7 @@ loader.load(
                 selectedObject = null;
                 controls.enabled = true; // Re-enable OrbitControls
 
-                console.log("Rotation ended");
+                //console.log("Rotation ended");
             }
         }
 
@@ -255,7 +262,6 @@ loader.load(
         renderer.domElement.addEventListener('pointermove', onPointerMove);
         renderer.domElement.addEventListener('pointerup', onPointerUp);
 
-        //lampada_cilindrica = scene.getObjectByName("C_LightBulb");
         lampada_esferica = scene.getObjectByName("S_LightBulb");
         lampada_esferica.visible = true;
         //add light to the lampada_esferica object
@@ -263,7 +269,7 @@ loader.load(
         light.position.set(0, 0, 0);
         lampada_esferica.add(light);
 
-
+        // Add the example scene with a table
         SGI_Example.setupMockupScene(scene, suporte);
 
 
@@ -276,7 +282,7 @@ loader.load(
     }
 );
 // Helper Functions
-
+// Create a ring geometry to indicate rotation constraints
 function createRotationIndicator(axis, radius) {
     let geometry = new THREE.RingGeometry(radius, radius + 0.05, 32);
     //geometry.name = "rotationIndicator";
@@ -306,19 +312,21 @@ function createRotationIndicator(axis, radius) {
 
     return ring;
 }
+// Animation control functions
 function startAnimations() {
     actions.forEach(action => {
         action.reset();
         action.play();
+
     });
 }
-
+// Pause all animations
 function pauseAnimations() {
     actions.forEach(action => {
         action.paused = true;
     });
 }
-
+// Stop and reset all animations
 function resetAnimations() {
     actions.forEach(action => {
         action.stop();
@@ -330,7 +338,10 @@ function resetAnimations() {
 let clock = new THREE.Clock();
 let min_latency = 1 / 30 // 30fps;
 let delta = 0;
+
 function animar() {
+
+
     requestAnimationFrame(animar);
     controls.update();
     renderer.render(scene, camera)
@@ -342,7 +353,9 @@ function animar() {
     mixer.update(Math.floor(delta / min_latency) * min_latency)
     renderer.render(scene, camera)
     delta = delta % min_latency
+
 }
+// Change aplique material color
 function changeMaterialColor(color) {
     const object = scene.getObjectByName("Support"); // Replace with your object's name
     if (object) {
@@ -367,6 +380,7 @@ document.getElementById('branco').addEventListener('click', () => {
 document.getElementById('btn_anim').addEventListener('click', startAnimations);
 document.getElementById('btn_pausar').addEventListener('click', pauseAnimations);
 document.getElementById('btn_parar').addEventListener('click', resetAnimations);
+
 document.getElementById('threeDModal').addEventListener('shown.bs.modal', () => {
     // Force resize to ensure proper render dimensions
     camera.aspect = container.clientWidth / container.clientHeight;
