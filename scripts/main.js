@@ -165,8 +165,6 @@ loader.load(
                     maxRotation = object.userData.maxRotation;
                     previousMousePosition.set(event.clientX, event.clientY);
                     controls.enabled = false;
-                    // console.log("Selected object: ", object, "Rotation axis: ", rotationAxis, "Min rotation: ", minRotation, "Max rotation: ", maxRotation);
-                    // Highlight the selected object
 
 
                     // Add object to OutlinePass
@@ -175,10 +173,6 @@ loader.load(
                     // Add AxesHelper
                     axesHelper = new THREE.AxesHelper(2);
                     object.add(axesHelper);
-
-                    // Add Rotation Indicator
-                    //rotationIndicator = createRotationIndicator(object.userData.axis, 1.5);
-                    //object.add(rotationIndicator);
 
                     // Add Rotation Indicator
                     rotationIndicator = createRotationIndicator(object.userData.axis, 1.5);
